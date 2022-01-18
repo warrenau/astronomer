@@ -1,0 +1,7 @@
+outline for project
+
+script for reading serpent output
+script for reading star output
+script for checking for errors in output(s)?
+script for processing data -- is this separate from reading scripts?
+script to run all of the scripts in the package -- can take inputs
