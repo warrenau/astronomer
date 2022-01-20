@@ -1,6 +1,6 @@
 outline for project
 
-script for reading serpent output
+script for reading serpent output -- main output file and detector files
 script for reading star output
 script for checking for errors in output(s)?
 script for processing data -- is this separate from reading scripts?
