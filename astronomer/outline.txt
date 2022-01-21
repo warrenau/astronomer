@@ -5,3 +5,13 @@ script for reading star output
 script for checking for errors in output(s)?
 script for processing data -- is this separate from reading scripts?
 script to run all of the scripts in the package -- can take inputs
+
+
+brainstorm:
+- constelation must gather the data from both simulations, right? can I just use that, since its already in a format python likes? does constelation handle the final outputs, or just intermediate steps?
+- can force star to output csv files. are there other file formats available? hdf5 maybe?
+- detector outputs should be easy enough to read, but they are matlab files, so Im not sure how best to merge with python
+- do I need to make sure the data processing package runs python 2.7 so it can run on the cluster? running on the cluster would be nice
+- serpent output files are big and nasty. Im not sure how final outputs are reported with multi-processor sims.
+- I can practice with failed sims that have outputs. Should have 2 that each failed in a different way.
+- do I need to run a steady state serpent sim to get final reactivity? I could compare to initial steady run. Or is the k value from the transient sim good enough?
