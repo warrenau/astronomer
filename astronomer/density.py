@@ -11,7 +11,7 @@ from pathlib import Path
 # where _00100 at end of file name is time step, increments by 100 in folders
 # plot density vs time with a line for each data position on the physical experiment (I will have to find the correct positions)
 # plotting all of the time steps might not be reasonable if there are a lot -- this script or the main program should be somewhat adaptive to make good looking plots
-folder = Path("/media/sf_Mint_Share/astronomer/astronomer/LineProbe/")
+#folder = Path("astronomer/LineProbe/")
 
 
 # read in data one file at a time -- how?
@@ -19,15 +19,15 @@ folder = Path("/media/sf_Mint_Share/astronomer/astronomer/LineProbe/")
 # set upper time step limit manually? -- can this be done automatically
 min_step = 100
 max_step = 10300
-num_steps = max_step/min_step
+num_steps = int(max_step/min_step)
 
 
 for j in range(num_steps):
     # generate file name
-    filename = "Line_Probe_Density_Line_Dens_"+str('%05.0f' %(100*(j+1)))+".csv"
-    f = folder / filename
+    filename = "astronomer/LineProbe/Line_Probe_Density_LineDens_"+str('%05.0f' %(100*(j+1)))+".csv"
+    #f = folder / filename
     # read in file
-    dens_step = np.genfromtxt(f, delimiter=',')
+    dens_step = np.genfromtxt(filename, delimiter=',',skip_header=1)
 
     # set up array of zeros based on size of read in files
     if j == 0:
