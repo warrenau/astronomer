@@ -94,13 +94,15 @@ def density_to_atomdensity(data_in):
 
 
 # function to get time step data for MCNP input
-def get_time_step_data(data_in):
+def get_time_step_data(data_in, time):
     """ Sparses data file for time steps approx every 1 millisecond.
 
     Parameters
     ----------
     data_in : Density
         Data to be condensed into 1 ms time steps
+    time : float
+        Time steps requested.
 
     Returns
     -------
