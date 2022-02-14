@@ -94,22 +94,44 @@ def density_to_atomdensity(data_in):
 
 
 # function to get time step data for MCNP input
-def get_time_step_data(data_in, time):
-    """ Sparses data file for time steps approx every 1 millisecond.
+def get_time_step_data(data_in, time_step):
+    """ Sparses data file for time steps specified by user.
 
     Parameters
     ----------
     data_in : Density
-        Data to be condensed into 1 ms time steps
-    time : float
+        Data to be condensed into time steps
+    time_step : float
         Time steps requested.
 
     Returns
     -------
     data_out : Density
-        Data in 1 ms time steps.
+        Data in specified time steps.
     """
     # look up old scripts for this. should be pretty similar. maybe try to add dynamic adjustments, but not sure how.
+    data_out = Density(np.zeros((len(time_step)+2)), np.zeros((len(time_step)+2, len(data_in.p))), data_in.p)
+
+    data_out.t[0] = 0
+    data_out.t[-1] = data_in.t[-1]
+
+    data_out.d[0] = data_in.d[0,:]
+    data_out.d[-1] = data_in.d[-1,:]
+
+    # for loop that loops over specified time steps and finds data values for those time steps
+    # the actual time step values should be recorded in data_out.t
+    data_index = 0
+    for k in range(len(time_step)):
+        time = 0
+        while time < time_step[k+1]:
+            time = data_in.t[data_index]
+            data_index += 1
+        
+        data_out.t[k+1] = data_in.t[data_index]
+        data_out.d[k+1,:] = data_in.d[data_index,:]
+
+    return data_out
+
 
 
 # store the data as hdf5?
