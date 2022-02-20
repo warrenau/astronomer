@@ -26,12 +26,7 @@ class Density(object):
 # dont use line probe data -- use the monitor csv files that have data for each position
 
 
-# read in data
-filepath = 'astronomer/Data/'
-filename = 'BOT2HENRIDensity'
-f = filepath+filename+'.csv'
 
-positions = ('TS00', 'TS01', 'TS02', 'TS03', 'TS04', 'TS05')
 
 def plot_data(filename, positions):
     """ Plots data from csv file into png and svg formats.
@@ -69,8 +64,9 @@ def plot_data(filename, positions):
     plt.ylabel('Density (kg/m^3)')
     plt.figlegend(loc='upper left', bbox_to_anchor=(0.2,0.8))
     plt.grid(b=True, which='major', axis='both')
-    plt.savefig(filepath+filename+'_plot.png',transparent=True)
-    plt.savefig(filepath+filename+'_plot.svg',transparent=True)
+    plt.savefig('astronomer/plots/'+filename+'_plot.png',transparent=True)
+    plt.savefig('astronomer/plots/'+filename+'_plot.svg',transparent=True)
+    plt.savefig('astronomer/plots/'+filename+'_plot.pdf',transparent=True)
 
     return data
 
@@ -88,7 +84,7 @@ def density_to_atomdensity(data_in):
         Density over time in atom/b-cm in Density class format.
     """
     data_out = Density(data_in.t, data_in.d, data_in.p)
-    data_out.d = data_out * 1000 * 6.022e23 * 1e-6 * 1e-24 / 3.016029
+    data_out.d = data_in.d * 1000 * 6.022e23 * 1e-6 * 1e-24 / 3.016029
     return data_out
 
 
@@ -123,7 +119,7 @@ def get_time_step_data(data_in, time_step):
     data_index = 0
     for k in range(len(time_step)):
         time = 0
-        while time < time_step[k+1]:
+        while time < time_step[k]:
             time = data_in.t[data_index]
             data_index += 1
         
@@ -131,6 +127,19 @@ def get_time_step_data(data_in, time_step):
         data_out.d[k+1,:] = data_in.d[data_index,:]
 
     return data_out
+
+
+
+# write Density class data to file
+def writeDensity(data, filename):
+    """ Writes Density class data to csv file.
+    """
+    data_out = np.zeros((len(data.t),len(data.d[0,:])+1))
+    data_out[:,0] = data.t
+    data_out[:,1:] = data.d
+    with open(filename, 'w') as f:
+        f.write('Time,'+','.join(data.p)+'\n' )
+        np.savetxt(f, data_out, delimiter=',', newline='\n')
 
 
 
