@@ -38,5 +38,5 @@ atomdensity_data = density_to_atomdensity(density_data)
 
 density_data_step = get_time_step_data(atomdensity_data, time_step)
 
-writeDensity(density_data_step, 'astronomer/Data/density_step.csv')
+writeDensity(density_data_step, filepath+filename+'_step.csv')
 
