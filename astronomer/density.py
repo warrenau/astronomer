@@ -3,7 +3,6 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-from pathlib import Path
 
 
 # define class
@@ -23,13 +22,10 @@ class Density(object):
         self.d = data
         self.p = positions
 
-# dont use line probe data -- use the monitor csv files that have data for each position
 
-
-
-
-def plot_data(filename, positions):
-    """ Plots data from csv file into png and svg formats.
+# take data from csv file and convert into Density class to be used by other functions
+def data_to_density(filename, positions):
+    """ Takes data from csv and converts to Density class.
     Parameters
     ----------
     filename : string
@@ -41,18 +37,27 @@ def plot_data(filename, positions):
     -------
     data : Density
         Formatted data from csv file. # maybe this should be a separate function.
+
     """
 
-    filepath = 'astronomer/Data/'
-    f = filepath+filename+'.csv'
-
-    data_read = np.genfromtxt(f, delimiter=',')
+    data_read = np.genfromtxt(filename, delimiter=',')
     # need to define class or something to handle data
     time = data_read[1:,0]
     data_in = data_read[1:,1:]
 
 
     data = Density(time, data_in, positions)
+    return data
+
+
+# plot data from Density class
+def plot_data(data, filename):
+    """ Plots data from data in Density class format into png, svg, and pdf formats.
+    Parameters
+    ----------
+    filename : string
+        name of file to be saved to
+    """
 
     # plot the data
     plt.rcParams['font.family'] = 'serif'
@@ -68,7 +73,6 @@ def plot_data(filename, positions):
     plt.savefig('astronomer/plots/'+filename+'_plot.svg',transparent=True)
     plt.savefig('astronomer/plots/'+filename+'_plot.pdf',transparent=True)
 
-    return data
 
 # function to convert units to atom/b-cm for MCNP
 def density_to_atomdensity(data_in):

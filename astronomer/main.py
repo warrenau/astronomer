@@ -10,12 +10,12 @@ from density import *
 
 # read in data
 filepath = 'astronomer/Data/'
-filename = 'BOT2HENRIDensity'
+filename = 'HENRI_250psi_HeatGen_TS_density'
 f = filepath+filename+'.csv'
 
 positions = ('TS00', 'TS01', 'TS02', 'TS03', 'TS04', 'TS05')
 
-time_step = np.array([0.001, 0.002, 0.003, 0.004, 0.005])
+time_step = np.array([0.001, 0.002, 0.003, 0.004, 0.005, 0.006, 0.007, 0.008, 0.009])
 
 
 ##########
@@ -32,7 +32,9 @@ time_step = np.array([0.001, 0.002, 0.003, 0.004, 0.005])
 
 
 #
-density_data = plot_data(filename, positions)
+density_data = data_to_density(f,positions)
+
+plot_data(density_data, filename)
 
 atomdensity_data = density_to_atomdensity(density_data)
 
