@@ -112,23 +112,23 @@ def get_time_step_data(data_in, time_step):
     # look up old scripts for this. should be pretty similar. maybe try to add dynamic adjustments, but not sure how.
     data_out = Density(np.zeros((len(time_step)+2)), np.zeros((len(time_step)+2, len(data_in.p))), data_in.p)
 
-    data_out.t[0] = 0
+    data_out.t[0] = data_in.t[0]
     data_out.t[-1] = data_in.t[-1]
 
-    data_out.d[0] = data_in.d[0,:]
-    data_out.d[-1] = data_in.d[-1,:]
+    data_out.d[0] = data_in.d[0]
+    data_out.d[-1] = data_in.d[-1]
 
     # for loop that loops over specified time steps and finds data values for those time steps
     # the actual time step values should be recorded in data_out.t
     data_index = 0
     for k in range(len(time_step)):
         time = 0
-        while time < time_step[k]:
+        while time < time_step[k] and data_index < len(time_step):
             time = data_in.t[data_index]
             data_index += 1
         
-        data_out.t[k+1] = data_in.t[data_index]
-        data_out.d[k+1,:] = data_in.d[data_index,:]
+        data_out.t[k+1] = time #data_in.t[data_index-1]
+        data_out.d[k+1] = data_in.d[data_index-1]
 
     return data_out
 
