@@ -25,15 +25,17 @@ def test_step_data():
     d = np.array([1e0, 3e0, 1e1, 7e1, 1e2, 2e2, 1e3, 4e3, 1e4, 4e4])
     p = ('test',)
     data = dens.Density(t,d,p)
-    time_step = np.array([0.001, 0.002, 0.003, 0.004, 0.005, 0.006, 0.007, 0.008])
+    time_step = np.array([0.001, 0.002, 0.003, 0.004])
 
     step_data = dens.get_time_step_data(data, time_step)
 
-    test_d = np.array([1e0,1e1,1e2,1e3,1e4,4e4])
+    test_d = np.array([[1e0],[1e1],[1e2],[1e3],[1e4],[4e4]])
     test_t = np.array([0, 0.0012, 0.0021, 0.0032, 0.004, 0.0043])
     test_data = dens.Density(test_t, test_d, p)
-    print(step_data)
-    print(test_data)
+    print(step_data.t)
+    print(test_data.t)
+    print(step_data.d)
+    print(test_data.d)
 
 
-    assert step_data == test_data
+    assert all(step_data.t == test_data.t) and all(step_data.d == test_data.d)

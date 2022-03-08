@@ -121,9 +121,10 @@ def get_time_step_data(data_in, time_step):
     # for loop that loops over specified time steps and finds data values for those time steps
     # the actual time step values should be recorded in data_out.t
     data_index = 0
+    time = 0
     for k in range(len(time_step)):
-        time = 0
-        while time < time_step[k] and data_index < len(time_step):
+        
+        while time < time_step[k] and data_index < len(data_in.t):
             time = data_in.t[data_index]
             data_index += 1
         
