@@ -1,7 +1,8 @@
 # this is the main script for astronomer
 # here you will call other scripts and functions to process the data you want
-# this script can be modified directly (or, when I get it working, use an input file)
+# this script can be modified directly
 
+# packages
 import numpy as np
 import matplotlib.pyplot as plt
 import density as dens
@@ -15,7 +16,6 @@ f = filepath+filename+'.csv'
 positions = ('TS00', 'TS01', 'TS02', 'TS03', 'TS04', 'TS05')
 
 time_step = np.array([0.001, 0.002, 0.003, 0.004, 0.005, 0.006, 0.007, 0.008, 0.009])
-
 
 
 # functions

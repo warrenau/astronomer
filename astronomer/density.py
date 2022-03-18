@@ -1,9 +1,7 @@
-# this is a script/function to process the density data
-# will need inputs of file paths to use -- this should be based on constelation
+# density processing classes and functions
 
 import numpy as np
 import matplotlib.pyplot as plt
-
 
 # define class
 class Density(object):
@@ -14,8 +12,7 @@ class Density(object):
     t : time in units of [s]
     d : density in units of [kg/m^3]
     p : the name of the locations
-    """ # I want a way of including the header / position information, but Im not sure how rn
-
+    """ 
     def __init__(self, time, data, positions):
         """Initializes the density data with supplied values for time, density data, and location names."""
         self.t = time
@@ -39,12 +36,9 @@ def data_to_density(filename, positions):
         Formatted data from csv file. # maybe this should be a separate function.
 
     """
-
     data_read = np.genfromtxt(filename, delimiter=',')
-    # need to define class or something to handle data
     time = data_read[1:,0]
     data_in = data_read[1:,1:]
-
 
     data = Density(time, data_in, positions)
     return data
@@ -58,8 +52,6 @@ def plot_data(data, filename):
     filename : string
         name of file to be saved to
     """
-
-    # plot the data
     plt.rcParams['font.family'] = 'serif'
     plt.rcParams['mathtext.fontset'] = 'dejavuserif'
     plt.figure(facecolor='w', edgecolor='k', dpi=200)
@@ -109,7 +101,6 @@ def get_time_step_data(data_in, time_step):
     data_out : Density
         Data in specified time steps.
     """
-    # look up old scripts for this. should be pretty similar. maybe try to add dynamic adjustments, but not sure how.
     data_out = Density(np.zeros((len(time_step)+2)), np.zeros((len(time_step)+2, len(data_in.p))), data_in.p)
 
     data_out.t[0] = data_in.t[0]
@@ -118,8 +109,6 @@ def get_time_step_data(data_in, time_step):
     data_out.d[0] = data_in.d[0]
     data_out.d[-1] = data_in.d[-1]
 
-    # for loop that loops over specified time steps and finds data values for those time steps
-    # the actual time step values should be recorded in data_out.t
     data_index = 0
     time = 0
     for k in range(len(time_step)):
@@ -128,7 +117,7 @@ def get_time_step_data(data_in, time_step):
             time = data_in.t[data_index]
             data_index += 1
         
-        data_out.t[k+1] = time #data_in.t[data_index-1]
+        data_out.t[k+1] = time
         data_out.d[k+1] = data_in.d[data_index-1]
 
     return data_out
@@ -145,7 +134,3 @@ def writeDensity(data, filename):
     with open(filename, 'w') as f:
         f.write('Time,'+','.join(data.p)+'\n' )
         np.savetxt(f, data_out, delimiter=',', newline='\n')
-
-
-
-# store the data as hdf5?
