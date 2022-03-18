@@ -4,7 +4,11 @@
 
 ## Usage
 
-To use the package, clone the repository to your local machine and add the data files to */astronomer/Data/*. The data files are expected to be in the format of a header over each column, a time column on the left, then data columns. This is consistent with exporting a tabulated plot in STAR-CCM+. Modify the *main.py* file to include the correct inputs for your data file(s) and the desired functions.
+To use the package, clone the repository to your local machine and add the data files to */astronomer/Data/*. The data files are expected to be in the format of a header over each column, a time column on the left, then data columns. This is consistent with exporting a tabulated plot in STAR-CCM+. Modify the *main.py* file to include the correct inputs for your data file(s) and the desired functions. Then run the *main.py* file from the first directory:
+```
+python astronomer/main.py
+```
+The script can also be run using an IDE such as VS Code.
 
 ***astronomer*** uses the `numpy` and `matplotlib` packages. It has been tested using `conda`. Here is an example of the preamble that calls packages in *main.py*:
 ```python
@@ -149,3 +153,15 @@ atomdensity_data = dens.density_to_atomdensity(density_data)
 atomdensity_data_step = dens.get_time_step_data(atomdensity_data, time_step)
 dens.writeDensity(atomdensity_data_step, filepath+filename+'_atomdensity_step.csv')
 ```
+
+## Demo
+
+***astronomer*** is includes two data files that can be processed. One has already been processed and the outputs are available in the *Data* and *plots* folders. The other file can be substituted into *main.py* if the user would like a working example. Just change the `filename` input from
+```python
+filename = 'HENRI_250psi_HeatGen_TS_density'
+```
+to
+```python
+filename = 'HENRI_250psi_HeatGen_Dens_TS'
+```
+If the user is confident with the usage of ***astronomer***, the included data files and outputs can be deleted and replaced with the user's files.
