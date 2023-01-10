@@ -1,16 +1,16 @@
-# density processing classes and functions
+# data processing classes and functions
 
 import numpy as np
 import matplotlib.pyplot as plt
 
 # define class
-class Density(object):
+class Data(object):
     """Data over time for one or more positions.
 
     Attributes
     ----------
     t : time in units of [s]
-    d : density in units of [kg/m^3]
+    d : data
     p : the name of the locations
     """ 
     def __init__(self, time, data, positions):
@@ -20,9 +20,9 @@ class Density(object):
         self.p = positions
 
 
-# take data from csv file and convert into Density class to be used by other functions
-def data_to_density(filename, positions):
-    """ Takes data from csv and converts to Density class.
+# take data from csv file and convert into Data class to be used by other functions
+def csv_to_data(filename, positions):
+    """ Takes data from csv and converts to Data class.
     Parameters
     ----------
     filename : string
@@ -32,7 +32,7 @@ def data_to_density(filename, positions):
 
     Returns
     -------
-    data : Density
+    data : Data
         Formatted data from csv file. # maybe this should be a separate function.
 
     """
@@ -40,13 +40,13 @@ def data_to_density(filename, positions):
     time = data_read[1:,0]
     data_in = data_read[1:,1:]
 
-    data = Density(time, data_in, positions)
+    data = Data(time, data_in, positions)
     return data
 
 
-# plot data from Density class
-def plot_data(data, filename):
-    """ Plots data from data in Density class format into png, svg, and pdf formats.
+# plot data from Data class
+def plot_density(data, filename):
+    """ Plots density from data in Data class format into png, svg, and pdf formats.
     Parameters
     ----------
     filename : string
@@ -54,17 +54,60 @@ def plot_data(data, filename):
     """
     plt.rcParams['font.family'] = 'serif'
     plt.rcParams['mathtext.fontset'] = 'dejavuserif'
-    plt.figure(facecolor='w', edgecolor='k', dpi=200)
+    plt.figure(facecolor='w', edgecolor='k', dpi=300)
     for k in range(len(data.p)):
         plt.plot(data.t, data.d[:,k], label=data.p[k])
-    plt.xlabel('Time (s)')
-    plt.ylabel('Density (kg/m^3)')
-    plt.figlegend(loc='upper left', bbox_to_anchor=(0.2,0.8))
+    plt.xlabel(r'Time ($s$)')
+    plt.ylabel(r'Density ($kg/m^3$)')
+    plt.figlegend(loc='lower right', bbox_to_anchor=(0.95,0.15))
     plt.grid(b=True, which='major', axis='both')
+    plt.tight_layout()
     plt.savefig('astronomer/plots/'+filename+'_plot.png',transparent=True)
     plt.savefig('astronomer/plots/'+filename+'_plot.svg',transparent=True)
     plt.savefig('astronomer/plots/'+filename+'_plot.pdf',transparent=True)
 
+def plot_pressure(data, filename):
+    """ Plots pressure from data in Data class format into png, svg, and pdf formats.
+    Parameters
+    ----------
+    filename : string
+        name of file to be saved to
+    """
+    plt.rcParams['font.family'] = 'serif'
+    plt.rcParams['mathtext.fontset'] = 'dejavuserif'
+    plt.figure(facecolor='w', edgecolor='k', dpi=300)
+    for k in range(len(data.p)):
+        plt.plot(data.t, data.d[:,k], label=data.p[k])
+    plt.xlabel(r'Time ($s$)')
+    plt.ylabel(r'Pressure ($Pa$)')
+    plt.figlegend(loc='lower right', bbox_to_anchor=(0.95,0.15))
+    plt.grid(b=True, which='major', axis='both')
+    plt.tight_layout()
+    plt.savefig('astronomer/plots/'+filename+'_plot.png',transparent=True)
+    plt.savefig('astronomer/plots/'+filename+'_plot.svg',transparent=True)
+    plt.savefig('astronomer/plots/'+filename+'_plot.pdf',transparent=True)
+
+
+def plot_temperature(data, filename):
+    """ Plots temperature from data in Data class format into png, svg, and pdf formats.
+    Parameters
+    ----------
+    filename : string
+        name of file to be saved to
+    """
+    plt.rcParams['font.family'] = 'serif'
+    plt.rcParams['mathtext.fontset'] = 'dejavuserif'
+    plt.figure(facecolor='w', edgecolor='k', dpi=300)
+    for k in range(len(data.p)):
+        plt.plot(data.t, data.d[:,k], label=data.p[k])
+    plt.xlabel(r'Time ($s$)')
+    plt.ylabel(r'Temperature ($K$)')
+    plt.figlegend(loc='upper left', bbox_to_anchor=(0.2,0.8))
+    plt.grid(b=True, which='major', axis='both')
+    plt.tight_layout()
+    plt.savefig('astronomer/plots/'+filename+'_plot.png',transparent=True)
+    plt.savefig('astronomer/plots/'+filename+'_plot.svg',transparent=True)
+    plt.savefig('astronomer/plots/'+filename+'_plot.pdf',transparent=True)
 
 # function to convert units to atom/b-cm for MCNP
 def density_to_atomdensity(data_in):
@@ -79,7 +122,7 @@ def density_to_atomdensity(data_in):
     data_out : Density
         Density over time in atom/b-cm in Density class format.
     """
-    data_out = Density(data_in.t, data_in.d, data_in.p)
+    data_out = Data(data_in.t, data_in.d, data_in.p)
     data_out.d = data_in.d * 1000 * 6.022e23 * 1e-6 * 1e-24 / 3.016029
     return data_out
 
@@ -101,7 +144,7 @@ def get_time_step_data(data_in, time_step):
     data_out : Density
         Data in specified time steps.
     """
-    data_out = Density(np.zeros((len(time_step)+2)), np.zeros((len(time_step)+2, len(data_in.p))), data_in.p)
+    data_out = Data(np.zeros((len(time_step)+2)), np.zeros((len(time_step)+2, len(data_in.p))), data_in.p)
 
     data_out.t[0] = data_in.t[0]
     data_out.t[-1] = data_in.t[-1]
@@ -124,9 +167,9 @@ def get_time_step_data(data_in, time_step):
 
 
 
-# write Density class data to file
-def writeDensity(data, filename):
-    """ Writes Density class data to csv file.
+# write Data class data to file
+def writeData(data, filename):
+    """ Writes Data class data to csv file.
     """
     data_out = np.zeros((len(data.t),len(data.d[0,:])+1))
     data_out[:,0] = data.t
