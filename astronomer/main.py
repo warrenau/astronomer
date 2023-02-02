@@ -5,7 +5,7 @@
 # packages
 import numpy as np
 import matplotlib.pyplot as plt
-import astronomer.astronomer as astro
+import astronomer as astro
 
 
 # inputs
