@@ -26,14 +26,14 @@ def csv_to_data(filename, positions):
     Parameters
     ----------
     filename : string
-        name of file to be plotted
+        name of file to be read in.
     positions : string
         names of positions or locations for data, like a header.
 
     Returns
     -------
     data : Data
-        Formatted data from csv file. # maybe this should be a separate function.
+        Formatted data from csv file.
 
     """
     data_read = np.genfromtxt(filename, delimiter=',')
@@ -114,13 +114,13 @@ def density_to_atomdensity(data_in):
     """ Converts density in kg/m^3 to atom/barn-cm for helium-3.
     Parameters
     ----------
-    data_in : Density
-        Density over time in kg/m^3 in Density class format.
+    data_in : Data
+        Density over time in kg/m^3 in Data class format.
 
     Returns
     -------
-    data_out : Density
-        Density over time in atom/b-cm in Density class format.
+    data_out : Data
+        Density over time in atom/b-cm in Data class format.
     """
     data_out = Data(data_in.t, data_in.d, data_in.p)
     data_out.d = data_in.d * 1000 * 6.022e23 * 1e-6 * 1e-24 / 3.016029
@@ -134,14 +134,14 @@ def get_time_step_data(data_in, time_step):
 
     Parameters
     ----------
-    data_in : Density
+    data_in : Data
         Data to be condensed into time steps
     time_step : float
         Time steps requested.
 
     Returns
     -------
-    data_out : Density
+    data_out : Data
         Data in specified time steps.
     """
     data_out = Data(np.zeros((len(time_step)+2)), np.zeros((len(time_step)+2, len(data_in.p))), data_in.p)
