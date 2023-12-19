@@ -7,7 +7,7 @@
 Install the package from `pip` and import into your processing script.
 
 ```python
-import astronomer as astro
+import constelation_astronomer as astro
 ```
 
 ### Classes

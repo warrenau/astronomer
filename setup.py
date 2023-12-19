@@ -5,7 +5,7 @@ DESCRIPTION = 'constelation-astronomer: results processing package'
 LONG_DESCRIPTION = 'constelation-astronomer: results processing package for CONSTELATION coupled model'
 
 setup(
-    name="constelation-astronomer",
+    name="constelation_astronomer",
     version=VERSION,
     author="Austin Warren",
     author_email="warrenau@oregonstate.edu",
