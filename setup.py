@@ -1,18 +1,18 @@
 from setuptools import setup, find_packages
 
 VERSION = '0.2.0'
-DESCRIPTION = 'astronomer: results processing package'
-LONG_DESCRIPTION = 'astronomer: results processing package for CONSTELATION coupled model'
+DESCRIPTION = 'constelation-astronomer: results processing package'
+LONG_DESCRIPTION = 'constelation-astronomer: results processing package for CONSTELATION coupled model'
 
 setup(
-    name="astronomer",
+    name="constelation-astronomer",
     version=VERSION,
     author="Austin Warren",
     author_email="warrenau@oregonstate.edu",
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     packages=find_packages(),
-    install_requires=[numpy,matplotlib],
+    install_requires=['numpy','matplotlib'],
     keywords=['python','data processing','Serpent 2', 'STAR-CCM+'],
     classifiers=[
         "Development Status :: 4 - Beta",
