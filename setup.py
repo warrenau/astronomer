@@ -12,6 +12,7 @@ setup(
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     packages=find_packages(),
+    py_modules=['astronomer'],
     install_requires=['numpy','matplotlib'],
     keywords=['python','data processing','Serpent 2', 'STAR-CCM+'],
     classifiers=[
