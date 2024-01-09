@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.2.0'
+VERSION = '1.1.0'
 DESCRIPTION = 'constelation-astronomer: results processing package'
 LONG_DESCRIPTION = 'constelation-astronomer: results processing package for CONSTELATION coupled model'
 
