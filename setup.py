@@ -9,6 +9,8 @@ setup(
     version=VERSION,
     author="Austin Warren",
     author_email="warrenau@oregonstate.edu",
+    url="https://github.com/warrenau/astronomer",
+    license="MIT License",
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     packages=find_packages(),
