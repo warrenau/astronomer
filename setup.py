@@ -1,8 +1,10 @@
 from setuptools import setup, find_packages
+from pathlib import Path
+this_directory = Path(__file__).parent
 
 VERSION = '1.1.0'
-DESCRIPTION = 'constelation-astronomer: results processing package'
-LONG_DESCRIPTION = 'constelation-astronomer: results processing package for CONSTELATION coupled model'
+DESCRIPTION = 'constelation-astronomer: results processing package for CONSTELATION coupled model'
+LONG_DESCRIPTION = (this_directory/ "README.md").read_text()
 
 setup(
     name="constelation_astronomer",
