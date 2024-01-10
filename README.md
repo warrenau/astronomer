@@ -54,7 +54,7 @@ atomdensity_data_step = astro.get_time_step_data(atomdensity_data, time_step)
 ---
 `writeData`: writes a `Data` class object out to a *.csv* file. The first argument is the `Data` class object to be written. The second argument is the path of the output file. A suggested naming scheme is made by appending '*_step.csv*' to the file that was read in originally, as seen below.
 ```python
-dens.writeDensity(atomdensity_data_step, filename+'_step.csv')
+astro.writeData(atomdensity_data_step, filename+'_step.csv')
 ```
 
 
