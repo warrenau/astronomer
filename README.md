@@ -34,7 +34,7 @@ density_data = astro.csv_to_data(filepath,positions)
 ```
 
 ---
-`plot_density`, `plot_pressure`, and `plot_temperature`: plots the data stored in the given `Data` class object. The first argument is the `Data` class object of interest. The second argument is the filename to be used as a base for the plot filename.
+`plot_density`, `plot_pressure`, and `plot_temperature`: plots the data stored in the given `Data` class object. The first argument is the `Data` class object of interest. The second argument is the filename to be used as a base for the plot filename. The function will append *`_plot`* to the input filename before saving.
 ```python
 astro.plot_density(density_data, filename)
 ```
