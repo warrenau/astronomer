@@ -62,9 +62,9 @@ def plot_density(data, filename):
     plt.figlegend(loc='lower right', bbox_to_anchor=(0.95,0.15))
     plt.grid(b=True, which='major', axis='both')
     plt.tight_layout()
-    plt.savefig('astronomer/plots/'+filename+'_plot.png',transparent=True)
-    plt.savefig('astronomer/plots/'+filename+'_plot.svg',transparent=True)
-    plt.savefig('astronomer/plots/'+filename+'_plot.pdf',transparent=True)
+    plt.savefig(filename+'_plot.png',transparent=True)
+    plt.savefig(filename+'_plot.svg',transparent=True)
+    plt.savefig(filename+'_plot.pdf',transparent=True)
 
 def plot_pressure(data, filename):
     """ Plots pressure from data in Data class format into png, svg, and pdf formats.
@@ -83,9 +83,9 @@ def plot_pressure(data, filename):
     plt.figlegend(loc='lower right', bbox_to_anchor=(0.95,0.15))
     plt.grid(b=True, which='major', axis='both')
     plt.tight_layout()
-    plt.savefig('astronomer/plots/'+filename+'_plot.png',transparent=True)
-    plt.savefig('astronomer/plots/'+filename+'_plot.svg',transparent=True)
-    plt.savefig('astronomer/plots/'+filename+'_plot.pdf',transparent=True)
+    plt.savefig(filename+'_plot.png',transparent=True)
+    plt.savefig(filename+'_plot.svg',transparent=True)
+    plt.savefig(filename+'_plot.pdf',transparent=True)
 
 
 def plot_temperature(data, filename):
@@ -105,9 +105,9 @@ def plot_temperature(data, filename):
     plt.figlegend(loc='upper left', bbox_to_anchor=(0.2,0.8))
     plt.grid(b=True, which='major', axis='both')
     plt.tight_layout()
-    plt.savefig('astronomer/plots/'+filename+'_plot.png',transparent=True)
-    plt.savefig('astronomer/plots/'+filename+'_plot.svg',transparent=True)
-    plt.savefig('astronomer/plots/'+filename+'_plot.pdf',transparent=True)
+    plt.savefig(filename+'_plot.png',transparent=True)
+    plt.savefig(filename+'_plot.svg',transparent=True)
+    plt.savefig(filename+'_plot.pdf',transparent=True)
 
 # function to convert units to atom/b-cm for MCNP
 def density_to_atomdensity(data_in):
