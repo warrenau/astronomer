@@ -15,6 +15,7 @@ setup(
     license="MIT License",
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
+    long_description_content_type='text/markdown',
     packages=find_packages(),
     py_modules=['astronomer'],
     install_requires=['numpy','matplotlib'],
