@@ -1,8 +1,10 @@
 from setuptools import setup, find_packages
+from pathlib import Path
+this_directory = Path(__file__).parent
 
-VERSION = '1.1.0'
-DESCRIPTION = 'constelation-astronomer: results processing package'
-LONG_DESCRIPTION = 'constelation-astronomer: results processing package for CONSTELATION coupled model'
+VERSION = '1.1.4'
+DESCRIPTION = 'constelation-astronomer: results processing package for CONSTELATION coupled model'
+LONG_DESCRIPTION = (this_directory/ "README.md").read_text()
 
 setup(
     name="constelation_astronomer",
@@ -13,6 +15,7 @@ setup(
     license="MIT License",
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
+    long_description_content_type='text/markdown',
     packages=find_packages(),
     py_modules=['astronomer'],
     install_requires=['numpy','matplotlib'],
